@@ -1,0 +1,15 @@
+package MainPackage;
+
+import CinePackage.Cine;
+
+public class MainS102N3E1 {	
+
+	public static void main(String[] args) {
+		// DEFINICIO VARIABLES
+		Cine cine = new Cine();
+
+		// ACCIONS
+		cine.Iniciar();
+
+	}
+}

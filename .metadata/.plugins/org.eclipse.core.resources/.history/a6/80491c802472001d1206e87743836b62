@@ -1,0 +1,91 @@
+package MainPackage;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class MainS102N3E1 {
+
+	public static void main(String[] args) {
+
+		Byte numFiles = 0, numButaquesFila = 0;
+
+		// PAS 1) INPUT Nº FILES I Nº SEIENTS X FILA
+		numFiles = DemanarFiles();
+		numButaquesFila = DemanarButaquesFila();
+
+		// PAS 2) MOSTRAR MENÚ PRINCIPAL
+		MenuPrincipal();
+
+		// PAS 3
+	}
+
+	private static void MenuPrincipal() {
+		// DEFINIR VARIABLES
+		String text = "";
+
+		// ACCIONS
+		text = "****MENÚ PRINCIPAL****\r\n"
+				+ "1.- Mostrar totes les butaques reservades.\r\n"
+				+ "2.- Mostrar les butaques reservades per una persona.\r\n"
+				+ "3.- Reservar una butaca.\r\n"
+				+ "4.- Anul·lar la reserva d’una butaca.\r\n"
+				+ "5.- Anul·lar totes les reserves d’una persona.\r\n"
+				+ "0.- Sortir.";
+
+		System.out.println(text);
+		
+		// SORTIDA
+
+	}
+
+	private static byte DemanarFiles() {
+		// DECLARACIÓ VARIABLES
+		Boolean correcte = false;
+		byte numFiles = 0;
+		Scanner myScanner;
+
+		// ACCIONS
+		System.out.println("Quantes files té el cinema?");
+		// Estarem en el bucle fins que el format sigui correcte
+		while (!correcte) {
+			try {
+				myScanner = new Scanner(System.in);
+				numFiles = myScanner.nextByte();
+
+				// Sols s'arriba aquí, si el format és elcorrecte
+				correcte = true;
+			} catch (InputMismatchException ex) {
+				System.out.println("Error de format, entra un nº de files correcte");
+			}
+		}
+		
+		// SORTIDA
+		return numFiles;
+	}
+
+	private static byte DemanarButaquesFila() {
+		// DECLARACIÓ VARIABLES
+		Boolean correcte = false;
+		byte numSeientsFila = 0;
+		Scanner myScanner;
+
+		// ACCIONS
+		System.out.println("Quantes butaques té cada fila?");
+		// Estarem en el bucle fins que el format sigui correcte
+		while (!correcte) {
+			try {
+				myScanner = new Scanner(System.in);
+				numSeientsFila = myScanner.nextByte();
+
+				// Sols s'arriba aquí, si el format és elcorrecte
+				correcte = true;
+			} catch (InputMismatchException ex) {
+				System.out.println("Error de format, entra un nº de seients x fila correcte");
+			}
+		}
+		
+		// SORTIDA
+		return numSeientsFila;
+	}
+
+}

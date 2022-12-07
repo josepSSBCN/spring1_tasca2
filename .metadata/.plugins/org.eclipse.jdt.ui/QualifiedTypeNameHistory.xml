@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="main.Venda"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="main.VendaBuidaException"/>
+    <fullyQualifiedTypeName name="java.lang.ArrayIndexOutOfBoundsException"/>
+    <fullyQualifiedTypeName name="main.Producte"/>
+    <fullyQualifiedTypeName name="javax.sound.sampled.BooleanControl"/>
+    <fullyQualifiedTypeName name="java.lang.ExceptionInInitializerError"/>
+    <fullyQualifiedTypeName name="java.util.InputMismatchException"/>
+    <fullyQualifiedTypeName name="MainPackage.Entrada"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="MainPackage.GestioButaques"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="Excepcions.ExcepcioButacaLliure"/>
+    <fullyQualifiedTypeName name="Excepcions.ExcepcioFilaIncorrecta"/>
+    <fullyQualifiedTypeName name="Excepcions.ExcepcioSeientIncorrecte"/>
+    <fullyQualifiedTypeName name="Excepcions.ExcepcioButacaOcupada"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="MainPackage.ToolsGlbl"/>
+    <fullyQualifiedTypeName name="CinePackage.Cine"/>
+    <fullyQualifiedTypeName name="CinePackage.Butaca"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="CinePackage.GestioButaques"/>
+</qualifiedTypeNameHistroy>

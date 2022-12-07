@@ -1,0 +1,34 @@
+package main;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Venda venda1 = new Venda();
+		
+		//EXCEPCIÓ PROPIA "VendaBuidaException"
+		try {
+			// Es crida al mètode, sense haver afegit primer productes.
+			venda1.CalcularTotal();
+		}catch(VendaBuidaException ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		// EXCEPCIÓ "ArrayIndexOutOfBoundsException"
+		try {
+			Producte pro1 = new Producte("Pomes", 1.25f);
+			Producte pro2 = new Producte("Tronges", 2.25f);
+			
+			// S'afegeix a la llista de productes de la venda
+			venda1.productes.add(pro1);
+			venda1.productes.add(pro2);
+						
+			for(int i = 0; i < 10; i++) {
+				System.out.println(venda1.productes.get(i).nom);	
+			}
+		}catch(IndexOutOfBoundsException ex) {
+			System.out.println(ex.getMessage());			
+		}
+		
+		System.out.println("HOLA?");
+	}
+}

@@ -1,0 +1,38 @@
+package CinePackage;
+
+public class Butaca {
+	// ATRIBUTS
+	protected byte numFila;
+	protected byte numSeient;
+	protected String persona;
+
+	// CONSTRUCTOR
+	public Butaca(byte numFila, byte numSeient, String persona) {
+		this.numFila = numFila;
+		this.numSeient = numSeient;
+		this.persona = persona;
+	}
+
+	// GETTERS
+	public byte getNumFila() {
+		return numFila;
+	}
+
+	public byte getNumSeient() {
+		return numSeient;
+	}
+
+	public String getPersona() {
+		return persona;
+	}
+
+	// METODES
+	public boolean equals(Butaca btc2) {
+		return (this.numFila == btc2.getNumFila() && this.numSeient == btc2.getNumSeient());
+	}
+	
+	public String toString() {
+		return String.format("Fila: %s, Seient: %s, Persona: %s", this.numFila, this.numSeient, this.persona); 
+	}
+
+}

@@ -1,0 +1,392 @@
+package CinePackage;
+
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import ExcepcionsPackage.*;
+import MainPackage.ToolsGlbl;
+
+public class Cine {
+	// ATRIBUTS
+	protected byte numFiles;
+	protected byte numButaquesFila;
+	protected GestioButaques gestButaques;
+
+	// CONSTRUCTOR
+	public Cine() {
+		gestButaques = new GestioButaques();
+
+		DemanarDadesInicials();
+
+		// *//* TEMPORAL: x afegir informació i no haver de picar-la cada cop que
+		// depurem
+		AfegirInfoProva();
+	}
+
+	// MÈTODES PUBLICS
+	public void Iniciar() {
+		// DECLARACIÓ VARIABLES
+		boolean sortir = false;
+		byte opcioSeleccionada = 0;
+
+		// ACCIONS
+		do {
+			// 1) Crida al mètode que mostra el menú.
+			opcioSeleccionada = Menu();
+
+			// 2) Executa el mètode de l'opció seleccionada.
+			switch (opcioSeleccionada) {
+			case 0:
+				sortir = true;
+				break;
+			case 1:
+				MostrarTotesButaquesReservades();
+				break;
+			case 2:
+				MostrarButaquesPersona();
+				break;
+			case 3:
+				ReservarButaca();
+				break;
+			case 4:
+				AnularReservaButaca();
+				break;
+			case 5:
+				AnularReservesPersona();
+				break;
+			default:
+			}
+		} while (!sortir);
+
+		// SORTIDA
+		System.out.println("\r\nPrograma Finalitzat.");
+
+	}
+
+	// METODES PRIVATS
+	private void DemanarDadesInicials() {
+		// DEFINICIO VARIABLES
+
+		// ACCIONS
+		// 1) Demana el nº de files que tindrà el cinema
+		this.numFiles = (byte) ToolsGlbl.Scanner_int("Quantes files té el cinema? (valor entre 1 - 127)", 1, 127);
+
+		// 2) Demana el nº de butaques per fila del cinema
+		this.numButaquesFila = (byte) ToolsGlbl.Scanner_int("Quantes butaques té el cinema? (valor entre 1 - 127)", 1,
+				127);
+
+		// SORTIDA
+
+	}
+
+	private byte Menu() {
+		// DECLARACIÓ VARIABLES
+		boolean sortir = false;
+		byte opcioSeleccionada = 0;
+		String text = "";
+		Scanner myScan;
+
+		// ACCIONS
+		// 1) Es mostra el menú.
+		text = "\r\n\r\n****MENÚ PRINCIPAL****\r\n" + "1.- Mostrar totes les butaques reservades.\r\n"
+				+ "2.- Mostrar les butaques reservades per una persona.\r\n" + "3.- Reservar una butaca.\r\n"
+				+ "4.- Anul·lar la reserva d’una butaca.\r\n" + "5.- Anul·lar totes les reserves d’una persona.\r\n"
+				+ "0.- Sortir." + "\r\n\r\nSelecciona una de les opcions\r\n";
+
+		System.out.println(text);
+
+		// 2) Es demana que seleccioni una opció.
+		do {
+			try {
+				myScan = new Scanner(System.in);
+				opcioSeleccionada = myScan.nextByte();
+
+				// Sols s'arriba aquí, si el format és correcte.
+				if (opcioSeleccionada >= 0 & opcioSeleccionada <= 5) {
+					sortir = true;
+				} else {
+					System.out.println("El valor seleccionat ha de ser entre 0 i 5");
+				}
+			} catch (InputMismatchException ex) {
+				System.out.println("Error de format, torna-ho a provar");
+			}
+		} while (!sortir);
+
+		// SORTIDA
+		return opcioSeleccionada;
+	}
+
+	private void MostrarTotesButaquesReservades() {
+		// DEFINICIO VARIABLES
+		String text = "";
+		ArrayList<Butaca> butaques = new ArrayList<>();
+
+		// ACCIONS
+		text = "OPCIÓ 1: Mostrar totes les reserves de butaques.";
+		butaques = this.gestButaques.butaques;
+
+		// 0) Comprovacions inicials
+		if (butaques.size() != 0) {
+			// 1) Recorre totes les butaques
+			for (Butaca butaca : butaques) {
+				text = String.format("%s\r\n%s", text, butaca.toString());
+			}
+		} else {
+			text = "No hi ha butaques reservades";
+		}
+
+		// SORTIDA
+		System.out.println(text + "\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+
+	}
+
+	private void MostrarButaquesPersona() {
+		// DEFINICIO VARIABLES
+		String text = "", nomPersona = "";
+		ArrayList<Butaca> butaques = new ArrayList<>();
+
+		// ACCIONS
+		try {
+			System.out.println("\r\nOPCIÓ 2: Mostrar les butaques reservades per una persona.");
+			// 1) Entrar el nom de la persona
+			nomPersona = IntroduirPersona();
+
+			// 2) Recorre la llista de butaques cercant les butaques reservades per la
+			// persona
+			butaques = this.gestButaques.getButaques();
+			for (Butaca butaca : butaques) {
+				if (butaca.persona.equals(nomPersona)) {
+					text = String.format("%s\r\n%s", text, butaca.toString());
+				}
+			}
+
+			if (text.length() == 0) {
+				text = String.format("La '%s' no té cap butaca reservada.", nomPersona);
+			} else {
+				text = String.format("El client '%s' té les següents butaques reservades..." + "\r\n%s", nomPersona,
+						text);
+			}
+
+		} catch (ExcepcioNomPersonaIncorrecte ex) {
+			text = ex.getMessage();
+		}
+
+		// SORTIDA
+		System.out.println("\r\n" + text + "\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+	}
+
+	private void ReservarButaca() {
+		// DEFINICIO VARIABLES
+		boolean correcte = false;
+		byte numFila = -1, numButaca = -1;
+		String text = "", nomPersona = "";
+		Butaca newButaca;
+
+		// ACCIONS
+		try {
+			System.out.println("\r\nOPCIÓ 3: Reservar butaca");
+			// 1) Es demana el número de fila
+			numFila = IntroduirNumFila();
+
+			// 2) Es demana el número de butaca
+			numButaca = IntroduirNumSeient();
+
+			// 3) Es demana el nom
+			nomPersona = IntroduirPersona();
+
+			// 4) Es crea una instància butaca amb les dades
+			newButaca = new Butaca(numFila, numButaca, nomPersona);
+
+			// 5) Es crida al mètode de la classe GestioButaques, que guarda la butaca
+			correcte = this.gestButaques.AfegirButaca(newButaca);
+
+			if (correcte) {
+				text = "Reserva Realitzada Correctament!";
+			}
+		} catch (ExcepcioFilaIncorrecta ex) {
+			text = ex.getMessage();
+		} catch (ExcepcioSeientIncorrecte ex) {
+			text = ex.getMessage();
+		} catch (ExcepcioNomPersonaIncorrecte ex) {
+			text = ex.getMessage();
+		} catch (ExcepcioButacaOcupada ex) {
+			text = ex.getMessage();
+		} catch (Exception ex) {
+			text = ex.getMessage();
+		}
+
+		// SORTIDA
+		System.out.println("\r\n" + text + "\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+	}
+
+	private void AnularReservaButaca() {
+		// DEFINICIO VARIABLES
+		boolean resultat;
+		byte numFila = -1, numButaca = -1;
+		String text = "";
+
+		// ACCIONS
+		System.out.println("\r\nOPCIÓ 4: Anular la reserva d'una butaca");
+
+		try {
+			// 1) Es demana la fila
+			numFila = IntroduirNumFila();
+
+			// 2) Es demana el nº de butaca
+			numButaca = IntroduirNumSeient();
+
+			// 3) Es crida al mètode que elimina la reserva
+			resultat = this.gestButaques.eliminarButaca(numFila, numButaca);
+
+			if (resultat) {
+				text = String.format("\r\nLa butaca de la fila '%s' butaca '%s', ha sigut correctament alliberada!",
+						numFila, numButaca);
+			}
+
+		} catch (ExcepcioFilaIncorrecta ex) {
+			text = ex.getMessage();
+		} catch (ExcepcioSeientIncorrecte ex) {
+			text = ex.getMessage();
+		} catch (ExcepcioButacaLliure ex) {
+			text = ex.getMessage();
+		}
+
+		// SORTIDA
+		System.out.println("\r\n" + text + "\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+	}
+
+	private void AnularReservesPersona() {
+		// DEFINICIO VARIABLES
+		int numButaquesEliminades = 0;
+		String text = "", nomPersona = "";
+		ArrayList<Butaca> butaques;
+
+		// ACCIONS
+		System.out.println("\r\nOPCIÓ 5: Anular la reserva d'una pesona");
+
+		try {
+			// 1) Es demana a l'usuari, el nom de la perosona
+			nomPersona = new ArrayList<>(IntroduirPersona);
+
+			// 2) Es repassen totes les butaques
+			butaques = this.gestButaques.butaques;
+			for (int i = 0; i < butaques.size(); i++) {
+				if (nomPersona.equals(butaques.get(i).persona)) {
+					this.gestButaques.eliminarButaca(butaques.get(i).numFila, butaques.get(i).numSeient);
+					numButaquesEliminades++;
+				}
+			}
+
+			if (numButaquesEliminades == 1) {
+				text = String.format("S'ha alliberat la butaca del client '%s', correctament.", nomPersona);
+			} else if (numButaquesEliminades == 0) {
+				text = String.format("El client '%s' no te cap butaca per alliberar.", nomPersona);
+			} else {
+				text = String.format("S'han alliberat les %s butaques del client '%s', correctament.", nomPersona);
+			}
+
+		} catch (ExcepcioNomPersonaIncorrecte ex) {
+			text = ex.getMessage();
+		} catch (ExcepcioButacaLliure ex) {
+			text = ex.getMessage();
+		}
+
+		// SORTIDA
+		System.out.println("\r\n" + text + "\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+	}
+
+	private byte IntroduirNumFila() throws ExcepcioFilaIncorrecta {
+		// DEFINICIO VARIABLES
+		byte numFila = -1;
+
+		// ACCIONS
+		// 1) Es demana que introdueixi unnº de fila
+		numFila = (byte) ToolsGlbl.Scanner_int("Introdueix el nº de la fila");
+
+		// 2) Es comprova que sigui un número de fila correcte
+		if (numFila < 1 | numFila > this.numFiles) {
+			throw new ExcepcioFilaIncorrecta(numFila, (byte) 1, this.numFiles);
+		}
+
+		// SORTIDA
+		return numFila;
+	}
+
+	private byte IntroduirNumSeient() throws ExcepcioSeientIncorrecte {
+		// DEFINICIO VARIABLES
+		byte numButaca = -1;
+
+		// ACCIONS
+		// 1) Es demana el nº de labutaca
+		numButaca = (byte) ToolsGlbl.Scanner_int("Introdueix el nº de la butaca");
+
+		// 2) Es comprova que sigui un número de fila correcte
+		if (numButaca < 1 | numButaca > this.numButaquesFila) {
+			throw new ExcepcioSeientIncorrecte(numButaca, (byte) 1, this.numButaquesFila);
+		}
+
+		// SORTIDA
+		return numButaca;
+	}
+
+	private String IntroduirPersona() throws ExcepcioNomPersonaIncorrecte {
+		// DEFINICIO VARIABLES
+		String nomPersona = "";
+
+		// ACCIONS
+		// 1) Es demana el nom de la persona
+		nomPersona = ToolsGlbl.Scanner_strg("Introdueix el nom de la persona", true);
+
+		// 2) Es comprova que no contingui númmeros
+		if (nomPersona.matches(".*[0-9].*") | nomPersona.isEmpty()) {
+			throw new ExcepcioNomPersonaIncorrecte();
+		}
+
+		// SORTIDA
+		return nomPersona;
+	}
+
+	/**
+	 * L'única finalitat d'aquest mètode, és afegir alguna info, per estalviar temps
+	 * en les depuracions
+	 */
+	private void AfegirInfoProva() {
+		// DEFINICIO VARIABLES
+		Butaca butaca;
+
+		// ACCIONS
+		try {
+			butaca = new Butaca((byte) 5, (byte) 5, "Rosa Martinez");
+			this.gestButaques.AfegirButaca(butaca);
+			butaca = new Butaca((byte) 5, (byte) 6, "Rosa Martinez");
+			this.gestButaques.AfegirButaca(butaca);
+			butaca = new Butaca((byte) 5, (byte) 7, "Rosa Martinez");
+			this.gestButaques.AfegirButaca(butaca);
+
+			butaca = new Butaca((byte) 1, (byte) 1, "Miquel Hernandez");
+			this.gestButaques.AfegirButaca(butaca);
+			butaca = new Butaca((byte) 1, (byte) 2, "Sandra Sabater");
+			this.gestButaques.AfegirButaca(butaca);
+
+			butaca = new Butaca((byte) 2, (byte) 1, "Lionel Messi");
+			this.gestButaques.AfegirButaca(butaca);
+			butaca = new Butaca((byte) 2, (byte) 2, "Cristiano Ronaldo");
+			this.gestButaques.AfegirButaca(butaca);
+			butaca = new Butaca((byte) 2, (byte) 3, "Pedri");
+			this.gestButaques.AfegirButaca(butaca);
+			butaca = new Butaca((byte) 2, (byte) 4, "Xavi Hernandez");
+			this.gestButaques.AfegirButaca(butaca);
+		} catch (ExcepcioButacaOcupada e) {
+			System.out.println(e.getMessage());
+		}
+
+		// SORTIDA
+	}
+
+}

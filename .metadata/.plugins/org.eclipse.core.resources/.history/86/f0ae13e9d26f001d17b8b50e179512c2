@@ -1,0 +1,8 @@
+package main;
+
+public class VendaBuidaException extends Exception {
+	// CONSTRUCTOR
+	public VendaBuidaException() {
+		System.out.println("Per fer una venda primer has d’afegir productes");
+	}
+}

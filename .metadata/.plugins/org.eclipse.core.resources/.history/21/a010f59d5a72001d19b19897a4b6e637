@@ -1,0 +1,10 @@
+package Excepcions;
+
+public class ExcepcioButacaOcupada extends Exception {
+	// CONSTRUCTOR
+	public ExcepcioButacaOcupada (byte numFila, byte numButaca){
+		// El missatge es passa a la constructora de la classe pare
+		super(String.format("EXCEPCIO! La butaca de la fila '%s' i seient '%s', ja està ocupada.", 
+				numFila, numButaca));
+	}
+}

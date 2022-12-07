@@ -1,0 +1,17 @@
+package main;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Venda venda1 = new Venda();
+		
+		try {
+			// Es crida al mètode, sense haver afegit primer productes.
+			venda1.CalcularTotal();
+		}catch(VendaBuidaException ex){
+			System.out.println(ex.getMessage());
+		}catch(ArrayIndexOutOfBoundsException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+}

@@ -1,0 +1,8 @@
+
+public class Venda {
+	protected String nom;
+	protected int preu;
+	
+	
+
+}

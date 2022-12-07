@@ -1,0 +1,56 @@
+package MainPackage;
+
+import java.util.ArrayList;
+
+public class GestioButaques {
+	// ATRIBUTS
+	protected ArrayList<Butaca> butaques;
+
+	// CONSTRUCTOR
+	public GestioButaques() {
+		butaques = new ArrayList<>();
+	}
+
+	// GETTERS
+	public ArrayList<Butaca> getButaques() {
+		return butaques;
+	}
+
+	// METODES
+	public void AfegirButaca() {
+
+	}
+
+	public void eliminarButaca(byte numFila, byte numSeient) {
+		// DEFINICIÓ DE VARIABLES
+		boolean correcte = false;
+		int posicio = 0;
+		
+		// 1) ES CERCA SI EXISTEIX LA BUTACA		
+			posicio = cercarButaca(numFila, numSeient);
+		if (posicio != -1) {
+			this.butaques.remove(posicio);
+		}else {
+			//*//* Llançament exepció
+		}
+	}
+
+	public int cercarButaca(byte numFila, byte numSeient) {
+		// DECLARACIÓ DE VARIABLES
+		boolean correcte = false;
+		int index = 0, posicioButaca = -1;
+
+		if (this.butaques.size() > 0) {
+			while (!correcte) {
+				if (this.butaques.get(index).getNumFila() == numFila
+						& this.butaques.get(index).getNumSeient() == numSeient) {
+					correcte = true;
+					posicioButaca = index;
+				} else {
+					index++;
+				}
+			}
+		}
+		return posicioButaca - 1;
+	}
+}

@@ -1,0 +1,34 @@
+package MainPackage;
+
+public class Butaca {
+	// ATRIBUTS
+	protected byte numFila;
+	protected byte numSeient;
+	protected String persona;
+
+	// CONSTRUCTOR
+	public Butaca(byte numFila, byte numSeient, String persona) {
+		this.numFila = numFila;
+		this.numSeient = numSeient;
+		this.persona = persona;
+	}
+
+	// GETTERS
+	public byte getNumFila() {
+		return numFila;
+	}
+
+	public byte getNumSeient() {
+		return numSeient;
+	}
+
+	public String getPersona() {
+		return persona;
+	}
+
+	// METODES
+	public boolean Equals(Butaca btc2) {		
+		return (this.numFila == btc2.getNumFila() && this.numSeient == btc2.getNumSeient());
+	}
+
+}

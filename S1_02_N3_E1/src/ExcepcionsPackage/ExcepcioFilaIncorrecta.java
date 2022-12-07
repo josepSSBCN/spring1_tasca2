@@ -1,0 +1,10 @@
+package ExcepcionsPackage;
+
+public class ExcepcioFilaIncorrecta extends Exception{
+	// CONSTRUCTOR
+	public ExcepcioFilaIncorrecta (byte numFila, byte min, byte max){
+		// El missatge es passa a la constructora de la classe pare
+		super(String.format("EXCEPCIO! El nº de fila '%s', està fora dels límits.\r\nEl valor ha de ser entre"
+				+ " %s i %s", numFila, min, max));
+	}
+}

@@ -1,0 +1,17 @@
+package Excepcions;
+
+public class Excepcions extends Exception {
+
+}
+
+
+
+public class ExcepcioButacaLliure extends Exception {
+
+	// CONSTRUCTOR
+	public ExcepcioButacaLliure {
+		// El missatge es passa a la constructora de la classe pare
+		super("Per fer una venda primer s'han d’afegir productes.");
+	}
+}
+

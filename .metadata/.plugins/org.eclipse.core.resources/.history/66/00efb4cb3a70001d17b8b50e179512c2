@@ -1,0 +1,53 @@
+package MainPackage;
+
+import java.io.IOException;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Entrada myEntrada = new Entrada();
+		Byte myByte;
+		int myInt;
+		float myFloat;
+		char myChar;
+		String myString;
+		Boolean myBoolean;
+
+		// MÈTODES CONTROL DE EXCEPCIÓ: 'InputMismatchException'
+		// MÈTODE BYTE
+		myByte = myEntrada.llegirByte("Introdueix un byte");
+		System.out.println("El número: " + myByte + ", te el format correcte de 'byte'");
+
+		// MÈTODE CONTROL INT
+		myInt = myEntrada.llegirInt("Introdueix un número amb el format 'int'");
+		System.out.println("El número: " + myInt + ", te el format correcte de 'int'");
+
+		// MÈTODE FLOAT
+		myFloat = myEntrada.llegirFloat("Introdueix un número amb el format 'float'");
+		System.out.println("El número: " + myFloat + ", te el format correcte de 'float'");
+
+		// MÈTODES CONTROL DE EXCEPCIÓ: 'Exception'
+		// MÈTODE CHAR
+		myChar = myEntrada.llegirChar("Introdueix un char");
+		System.out.println("El caràcter: " + myChar + ", te el format correcte de 'char'");
+
+		// MÈTODE STRING
+		myString = myEntrada.llegirString("Introdueix un String");
+		System.out.println("La cadena: " + myString + ", te el format correcte de 'String'");
+
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+		try {
+			Runtime.getRuntime().exec("clear");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// MÈTODE BOOLEAN
+		myBoolean = myEntrada.llegirSiNo("Vols finalitzar el programa? Sí(s) / No(n)");
+		System.out.println("El programa ha finalitzat");
+
+	}
+
+}

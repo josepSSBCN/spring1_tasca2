@@ -1,0 +1,19 @@
+package MainPackage;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		Entrada myEntrada = new Entrada();
+		Byte numByte = 0;
+		
+		// MÈTODE BYTE
+		numByte = myEntrada.llegirByte("Introdueix un byte");
+		System.out.println("El número: " + numByte + ", és correcte");
+		
+		
+
+		
+	}
+
+}

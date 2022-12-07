@@ -1,0 +1,23 @@
+package main;
+
+public class Venda {
+	// ATRIBUTS
+	protected Producte[] productes;
+	protected int totalVenda;
+	
+	// CONSTRUCTORA
+	public Venda() {}
+	
+	// MÈTODES
+	public void CalcularTotal() throws VendaBuidaException {
+		if(this.productes == null) {
+			// Llançament de l'excepció
+			throw new VendaBuidaException();
+		}else {
+			for(int i=0; i < productes.length; i++) {
+				this.totalVenda += productes[i].preu;
+			}
+		}
+	}
+
+}

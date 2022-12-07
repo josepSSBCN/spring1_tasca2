@@ -1,0 +1,20 @@
+import java.util.ArrayList;
+
+public class Venda {
+	// ATRIBUTS
+	protected ArrayList<Producte> productes;
+	protected int totalVenda;
+	
+	// MÈTODES
+	public void CalcularTotal() {
+		if(this.productes.size()== 0) {
+			// Llançament de l'excepció
+			
+		}else {
+			for(int i=0; i < productes.size(); i++) {
+				this.totalVenda += productes.get(i).preu;
+			}
+		}
+	}
+
+}

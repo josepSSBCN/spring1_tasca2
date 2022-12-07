@@ -1,0 +1,9 @@
+package MainPackage;
+
+public class VendaBuidaException extends Exception {
+	// CONSTRUCTOR
+	public VendaBuidaException() {
+		// El missatge es passa a la constructora de la classe pare
+		super("Per fer una venda primer s'han d’afegir productes.");
+	}
+}

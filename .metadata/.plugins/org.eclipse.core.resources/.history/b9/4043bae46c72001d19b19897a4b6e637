@@ -1,0 +1,19 @@
+package MainPackage;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import CinePackage.Cine;
+
+public class MainS102N3E1 {
+	static Cine cine;
+	
+	public static void main(String[] args) {
+		cine = new Cine();
+
+		
+		cine.Iniciar();
+		
+	}
+
+}

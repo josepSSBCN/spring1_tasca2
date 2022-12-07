@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;MainPackage.Venda.CalcularTotal()&apos; to &apos;calcularTotal&apos;&#x0D;&#x0A;- Original project: &apos;S1_02_N1_E1&apos;&#x0D;&#x0A;- Original element: &apos;MainPackage.Venda.CalcularTotal()&apos;&#x0D;&#x0A;- Renamed element: &apos;MainPackage.Venda.calcularTotal()&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;CalcularTotal&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;MainPackage{Venda.java[Venda~CalcularTotal" name="calcularTotal" references="true" stamp="1670407710395" version="1.0"/>
+</session>

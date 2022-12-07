@@ -1,0 +1,9 @@
+package Excepcions;
+
+public class ExcepcioSeientIncorrecte extends Exception{
+	// CONSTRUCTOR
+	public ExcepcioSeientIncorrecte (){
+		// El missatge es passa a la constructora de la classe pare
+		super("EXCEPCIO! Aquest nº de seient, no és correcte.");
+	}
+}

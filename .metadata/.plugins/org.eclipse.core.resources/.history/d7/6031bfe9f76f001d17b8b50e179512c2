@@ -1,0 +1,35 @@
+package MainPackage;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Entrada {
+	// ATRIBUTS
+	static Scanner myScan = new Scanner(System.in);
+
+	// METODES
+	public static byte llegirByte(String missatge) {
+		// VARIABLES
+		boolean correcte = false;
+		byte byteOut = 0;
+
+		while (!correcte) {
+			try {
+				System.out.println(missatge);
+				byteOut = myScan.nextByte();
+			} catch (InputMismatchException ex) {
+				System.out.println("Error de format, torna-ho a provar");
+			} finally {
+				correcte = true;
+			}
+		}
+		return byteOut;
+	}
+
+	public static int llegirInt(String missatge);
+
+	public static float llegirFloat(String missatge);
+
+	public static double llegirDouble(String missatge);
+
+}

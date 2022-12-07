@@ -1,0 +1,32 @@
+package MainPackage;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		Entrada myEntrada = new Entrada();
+		Byte numByte;
+		int numInt;
+		float numFloat;
+		char carChar;
+		
+		// MÈTODE CHAR
+		carChar = myEntrada.llegirChar("Introdueix un char");
+		System.out.println("El caràcter: " + carChar + ", te el format correcte de 'char'");
+		
+		// MÈTODE BYTE
+		numByte = myEntrada.llegirByte("Introdueix un byte");
+		System.out.println("El número: " + numByte + ", te el format correcte de 'byte'");
+		
+		// MÈTODE CONTROL INT
+		numInt = myEntrada.llegirInt("Introdueix un número amb el format 'int'");
+		System.out.println("El número: " + numInt + ", te el format correcte de 'int'");
+
+		// MÈTODE FLOAT
+		numFloat = myEntrada.llegirFloat("Introdueix un número amb el format 'float'");
+		System.out.println("El número: " + numFloat + ", te el format correcte de 'float'");
+
+		
+	}
+
+}

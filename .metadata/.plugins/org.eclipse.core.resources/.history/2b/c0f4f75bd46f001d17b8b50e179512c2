@@ -1,0 +1,7 @@
+package main;
+
+public class Producte {
+	protected String nom;
+	protected int preu;
+	
+}

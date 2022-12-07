@@ -1,0 +1,14 @@
+package main;
+
+public class Producte {
+	// ATRIBUTS
+	protected String nom;
+	protected int preu;
+	
+	// CONSTRUCTOR
+	public Producte(String nom, int preu) {
+		this.nom = nom;
+		this.preu = preu;
+	}
+	
+}

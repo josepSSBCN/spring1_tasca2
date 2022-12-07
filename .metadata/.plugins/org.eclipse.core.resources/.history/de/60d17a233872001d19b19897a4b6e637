@@ -1,0 +1,75 @@
+package MainPackage;
+
+import java.util.ArrayList;
+
+import CinePackage.Butaca;
+import Excepcions.*;
+////*import Excepcions.ExcepcioButacaLliure;
+////*import Excepcions.ExcepcioButacaOcupada;
+
+
+public class GestioButaques {
+	// ATRIBUTS
+	protected ArrayList<Butaca> butaques;
+
+	// CONSTRUCTOR
+	public GestioButaques() {
+		butaques = new ArrayList<>();
+	}
+
+	// GETTERS
+	public ArrayList<Butaca> getButaques() {
+		return butaques;
+	}
+
+	// METODES
+	public boolean AfegirButaca(Butaca butaca) throws ExcepcioButacaOcupada {
+		// DEFINICIÓ DE VARIABLES
+		boolean resultat = false;
+
+		// Està lliure la butaca?
+		if (cercarButaca(butaca.getNumFila(), butaca.getNumSeient()) == -1) {
+			this.butaques.add(butaca);
+			resultat = true;
+		} else {
+			throw new ExcepcioButacaOcupada();
+			}
+
+		return resultat;
+	}
+
+	public boolean eliminarButaca(byte numFila, byte numSeient) throws ExcepcioButacaLliure {
+		// DEFINICIÓ DE VARIABLES
+		boolean resultat = false;
+		int posicio = 0;
+
+		// Està ocupada la butaca?
+		posicio = cercarButaca(numFila, numSeient);
+		if (posicio != -1) {
+			this.butaques.remove(posicio);
+			resultat = true;
+		} else {
+			throw new ExcepcioButacaLliure();
+		}
+		return resultat;
+	}
+
+	public int cercarButaca(byte numFila, byte numSeient) {
+		// DECLARACIÓ DE VARIABLES
+		boolean correcte = false;
+		int index = 0, posicioButaca = -1;
+
+		if (this.butaques.size() > 0) {
+			while (!correcte) {
+				if (this.butaques.get(index).getNumFila() == numFila
+						& this.butaques.get(index).getNumSeient() == numSeient) {
+					correcte = true;
+					posicioButaca = index;
+				} else {
+					index++;
+				}
+			}
+		}
+		return posicioButaca - 1;
+	}
+}

@@ -1,0 +1,85 @@
+package MainPackage;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class MainS102N3E1 {
+Scanner myScanner;
+
+	public static void main(String[] args) {
+
+		Byte numFiles = 0, numButaquesFila = 0;
+
+		// PAS 1) INPUT Nº FILES I Nº SEIENTS X FILA
+		numFiles = DemanarFiles();
+		numButaquesFila = DemanarButaquesFila();
+		
+		// PAS 2) MOSTRAR MENÚ PRINCIPAL
+		MostrarMenuPrincipal();
+		
+		// PAS 3
+	}
+
+
+	private static byte DemanarFiles() {
+		// DECLARACIÓ VARIABLES
+		Boolean correcte = false;
+		byte numFiles = 0;
+		
+		System.out.println("Quantes files te el cinema?");
+		// Estarem en el bucle fins que el format sigui correcte
+		while(!correcte) {
+			try {
+				myScanner = new Scanner(System.in);
+				numFiles = myScanner.nextByte();
+				
+				// Sols s'arriba aquí, si el format és elcorrecte
+				correcte = true;
+			}catch(InputMismatchException ex) {
+				System.out.println("Error de format, entra un nº de files correcte");
+			}
+		}		
+		return numFiles;
+	}
+	
+	private static byte DemanarButaquesFila() {
+		// DECLARACIÓ VARIABLES
+		Boolean correcte = false;
+		byte numSeientsFila = 0;
+		
+		System.out.println("Quantes butaques te cada fila?");
+		// Estarem en el bucle fins que el format sigui correcte
+		while(!correcte) {
+			try {
+				myScanner = new Scanner(System.in);
+				numSeientsFila = myScanner.nextByte();
+				
+				// Sols s'arriba aquí, si el format és elcorrecte
+				correcte = true;
+			}catch(InputMismatchException ex) {
+				System.out.println("Error de format, entra un nº de seients x fila correcte");
+			}
+		}		
+		return numSeientsFila;
+	}
+	
+	private static String MostrarMenuPrincipal() {
+		String text ="";
+		
+		text = "1.- Mostrar totes les butaques reservades.\r\n"
+				+ "\r\n"
+				+ "2.- Mostrar les butaques reservades per una persona.\r\n"
+				+ "\r\n"
+				+ "3.- Reservar una butaca.\r\n"
+				+ "\r\n"
+				+ "4.- Anul·lar la reserva d’una butaca.\r\n"
+				+ "\r\n"
+				+ "5.- Anul·lar totes les reserves d’una persona.\r\n"
+				+ "\r\n"
+				+ "0.- Sortir.";
+		
+		return text;
+	}
+	
+	
+}
